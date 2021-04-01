@@ -66,3 +66,63 @@ _________________________________________________
 // await
 const response = await axios.get('/user?ID=12345');
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# Error
+- For full details about the error use **e.response.data**
+```javascript
+ try {
+  res = await axios.post(uri,{
+      headers: headers,
+      data: form_data
+  })
+} catch (e){
+  console.log(e.response.data)
+}
+```
+
