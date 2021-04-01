@@ -41,6 +41,26 @@ const res = await axios.post(  window.location.origin + '/secure', { client_id: 
 ```
 
 
+<br><br>
+
+
+## POST with Image
+```javascript
+const FormData = require('form-data')
+const form = new FormData()
+
+form.append('file', readableFileStream, {
+    filename: 'test.png'
+})
+
+const headers = {...form.getHeaders()}
+
+const res = await axios.post(uri, form, {
+    headers: headers
+})
+
+return res.data
+```
 
 
 
