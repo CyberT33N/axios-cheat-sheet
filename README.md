@@ -237,6 +237,7 @@ axiosRetry(axios, {
     // if retry condition is not specified, by default idempotent requests are retried
     return error.response.status === 503;
   },
+  // retryCondition: (_error) => true // retry no matter what
 });
 
 const response = await axios({
