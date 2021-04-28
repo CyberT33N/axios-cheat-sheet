@@ -233,11 +233,34 @@ axiosRetry(axios, {
     console.log(`retry attempt: ${retryCount}`);
     return retryCount * 2000; // time interval between retries
   },
+  
+  
+  // A callback to further control if a request should be retried. By default, it retries if it is a network error or a 5xx error on an idempotent request (GET, HEAD, OPTIONS, PUT or DELETE).
+
+
+  // if retry condition is not specified, by default idempotent requests are retried
+  /*
   retryCondition: (error) => {
-    // if retry condition is not specified, by default idempotent requests are retried
     return error.response.status === 503;
   },
-  // retryCondition: (_error) => true // retry no matter what
+  */
+  
+  
+  // retry no matter what
+  /* retryCondition: (_error) => true */
+  
+  
+  // Only retry when we do not get server side status code back
+  /*
+  retryCondition: (error) => {
+    if(!error.response) {
+        if(!error.response.status) {
+            return true
+        }
+    }
+  }
+  */
+  
 });
 
 const response = await axios({
