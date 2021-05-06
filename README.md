@@ -20,6 +20,79 @@ Axios Cheat Sheet with the most needed stuff..
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# HEAD
+
+<br><br>
+
+
+## Example
+```javascript
+let res = await axios.head('http://webcode.me');
+console.log(`Status: ${res.status}`)
+console.log(`Server: ${res.headers.server}`)
+console.log(`Date: ${res.headers.date}`)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <br><br>
 _________________________________________________
