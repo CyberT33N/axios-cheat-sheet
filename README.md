@@ -305,44 +305,9 @@ _________________________________________________
 
 # axios-retry
 ```javascript
-const axios = require('axios');
-const axiosRetry = require('axios-retry');
-
-axiosRetry(axios, {
-  retries: 3, // number of retries
-  retryDelay: (retryCount) => {
-    console.log(`retry attempt: ${retryCount}`);
-    return retryCount * 2000; // time interval between retries
-  },
-  
-  
-  // A callback to further control if a request should be retried. By default, it retries if it is a network error or a 5xx error on an idempotent request (GET, HEAD, OPTIONS, PUT or DELETE).
-
-
-  // if retry condition is not specified, by default idempotent requests are retried
-  /*
-  retryCondition: (error) => {
-    return error.response.status === 503;
-  },
-  */
-  
-  
-  // retry no matter what
-  /* retryCondition: (_error) => true */
-  
-  
-  // Only retry when we do not get server side status code back
-  /*
-  retryCondition: (error) => {
-    if(!error.response) {
-        if(!error.response.status) {
-            return true
-        }
-    }
-  }
-  */
-  
-});
+// app.js
+const axios = require('axios')
+require('./utils')(axios)
 
 const response = await axios({
   method: 'GET',
@@ -352,6 +317,42 @@ const response = await axios({
     throw new Error(`API call failed with status code: ${err.response.status} after 3 retry attempts`);
   }
 });
+
+
+
+
+
+
+
+
+
+
+// utils.js
+const axiosRetry = require('axios-retry')
+const retriesAmount = 30
+
+module.exports = axios => {
+    axiosRetry(axios, {
+        retries: retriesAmount, // number of retries
+
+        retryDelay: (retryCount) => {
+            console.log(`retry attempt: ${retryCount}`)
+            return retryCount * 10000 // time interval between retries
+        },
+
+        /* A callback to further control if a request should be retried. By default, it retries if it is a network error or a 5xx error on an idempotent request (GET, HEAD, OPTIONS, PUT or DELETE). */
+        retryCondition: (error) => {
+            if(!error.response) {
+                return true
+            } else if(!error.response.status) {
+                return true
+            }
+        }
+
+        /* retry no matter what */
+        // retryCondition: (_error) => true
+    })
+}
 ```
 
 
