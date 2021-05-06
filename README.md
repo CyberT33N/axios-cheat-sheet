@@ -81,14 +81,22 @@ _________________________________________________
 
 <br><br>
 
-## GET
+## Example
 ```javascript
-// await
 const response = await axios.get('/user?ID=12345');
 ```
 
 
 
+
+<br><br>
+
+## Download an image and convert it to base64
+```javascript
+const imgBuffer = await axios.get(imgUrl, {
+  responseType: 'arraybuffer'
+})
+```
 
 
 
