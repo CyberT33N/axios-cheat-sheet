@@ -227,7 +227,33 @@ _________________________________________________
 }
 ```
 
+<br><br>
+<br><br>
 
+# Send status code instead of catch error
+- If you get a 404 with axios you will get an error which you must catch. Alternative you can return a response
+```javascript
+// global
+const axiosP1 = axios.create({
+  baseURL: `http://${process.env.HOST}:${process.env.PORT0}`,
+  headers: { 'project-id': 'test_project1' },
+  validateStatus: function (status) {
+    return status < 600;
+  }
+})
+
+// directly
+axios.post('/formulas/create', {
+     name: "",
+     parts: ""
+}, { validateStatus: function (status) {
+        return status < 600; // Reject only if the status code is greater than or equal to 500
+      }})
+  .then( 
+ (response) => { console.log(response) },
+ (error) => { console.log(error) }
+ );
+```
 
 
 
