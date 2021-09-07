@@ -117,6 +117,23 @@ const res = await axios.post(  window.location.origin + '/secure', { client_id: 
 <br><br>
 
 
+## POST with form params
+```javascript
+const querystring = require('querystring')
+
+const data = querystring.stringify({
+    project: projectId,
+    id: statisticId
+})
+
+const emailStatisticsDoc = await axios.post(uri, data, {headers: {'Content-Type': 'application/x-www-form-urlencoded' }})
+```
+
+
+
+<br><br>
+
+
 ## POST with Image
 ```javascript
 const FormData = require('form-data')
