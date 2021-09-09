@@ -149,6 +149,10 @@ const FormData = require('form-data')
 // notice that you must always create new form in case you want to use a function/method for future creations
 const form = new FormData()
 form.append('file', imageBuffer, 'test.png')
+
+// you cann add additional data to your body aswell
+form.append('name', 'bla blub')
+
 const headers = {...form.getHeaders()}
 
 const res = await axios.post(uri, form, {
