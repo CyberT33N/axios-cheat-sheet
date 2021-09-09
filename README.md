@@ -138,18 +138,18 @@ const emailStatisticsDoc = await axios.post(uri, data, {headers: {'Content-Type'
 ```javascript
 const FormData = require('form-data')
 
+const path = `${__dirname}/img.png`
+const img = await fs.readFile(path, "binary")
+const imageBuffer = Buffer.from(img)
+
 // notice that you must always create new form in case you want to use a function/method for future creations
 const form = new FormData()
-
-form.append('file', bufferFile, 'test.png')
-
+form.append('file', imageBuffer, 'test.png')
 const headers = {...form.getHeaders()}
 
 const res = await axios.post(uri, form, {
     headers: headers
 })
-
-return res.data
 ```
 
 
