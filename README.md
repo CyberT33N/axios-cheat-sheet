@@ -137,8 +137,11 @@ const emailStatisticsDoc = await axios.post(uri, data, {headers: {'Content-Type'
 ## POST with Image
 ```javascript
 const path = `${__dirname}/img.png`
+
+const imageBuffer = await fs.readFile(path)
+
 const img = await fs.readFile(path, "binary")
-const imageBuffer = Buffer.from(img)
+constimageUint8Array = Buffer.from(img)
 
 
 
