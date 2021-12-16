@@ -18,6 +18,42 @@ Axios Cheat Sheet with the most needed stuff..
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# Instance
+
+<br><br>
+
+
+## Create custom axios instance
+```javascript
+const axiosP1 = axios.create({
+  baseURL: `http://${process.env.HOST}:${process.env.PORT}`,
+  headers: {'id': 'test'}
+})
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <br><br>
