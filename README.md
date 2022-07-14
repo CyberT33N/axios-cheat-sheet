@@ -429,30 +429,46 @@ const response = await axios({
 
 
 // utils.js
+'use strict'
+
 const axiosRetry = require('axios-retry')
-const retriesAmount = 30
+const retriesAmount = 3
 
-module.exports = axios => {
-    axiosRetry(axios, {
-        retries: retriesAmount, // number of retries
+module.exports = (axios, retryCondition = undefined) => {
+    /**
+     * Will retry on any status code
+     * @param {*} error 
+     * @returns 
+     */
+    const retryConditionAll = error => {
+        if(error.response?.status) {
+            return true
+        }
+    }
 
-        retryDelay: (retryCount) => {
-            console.log(`retry attempt: ${retryCount}`)
-            return retryCount * 10000 // time interval between retries
-        },
-
-        /* A callback to further control if a request should be retried. By default, it retries if it is a network error or a 5xx error on an idempotent request (GET, HEAD, OPTIONS, PUT or DELETE). */
-        retryCondition: (error) => {
-            if(!error.response) {
-                return true
-            } else if(!error.response.status) {
-                return true
-            }
+    /**
+     * 
+     * @param {*} retryCount 
+     * @returns 
+     */
+    const retryDelay = (retryCount, e) => {
+        if(retryCount === retriesAmount) {
+            // Add informations to the error to detect if axios retry was used
+            e.axiosRetry = true
+            throw e
         }
 
-        /* retry no matter what */
-        // retryCondition: (_error) => true
-    })
+        console.log(`retry attempt: ${retryCount}`)
+        return retryCount * 2000 // time interval between retries
+    }
+
+    const cfg = {
+        retries: retriesAmount, // number of retries
+        retryDelay,
+        ...(retryCondition === 'all' ? { retryCondition: retryConditionAll } : {})
+    }
+
+    axiosRetry(axios, cfg)
 }
 ```
 
