@@ -490,3 +490,46 @@ module.exports = (axios, retryCondition = undefined) => {
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# FAQ Error
+
+## [ERR_FR_MAX_BODY_LENGTH_EXCEEDED]: Request body larger than maxBodyLength limit
+
+```javascript
+await axios({
+    method: 'post',
+    url: posturl,
+    data: formData,
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+    headers: {'Content-Type': 'multipart/form-data;boundary=' + formData.getBoundary()}
+})
+```
+
