@@ -497,6 +497,52 @@ module.exports = (axios, retryCondition = undefined) => {
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# Caching
+```
+const axios = require('axios')
+const memoize = require('memoizee')
+
+const axiosP1 = axios.create({
+    baseURL: `http://${process.env.HOST}:${process.env.PORT0}`,
+    headers,
+    validateStatus (status) {
+        return status < 600
+    }
+})
+
+const memoizedAxiosGet = memoize(url => {
+    return axiosP1.get(url)
+}, {
+    // Definieren Sie eine Option für Memoizee, die die Cachegröße beschränkt.
+    max: 100,
+    // Definieren Sie eine Option für Memoizee, die verhindert, dass der Cache das Ergebnis von fehlgeschlagenen Anfragen speichert.
+    promise: true,
+})
+
+const resSubscriptionTypePromise = memoizedAxiosGet(`/test/EmailSubscriptions/${channelInstanceId}`)
+const resEmailMailingPromise = memoizedAxiosGet(`test/EmailMailing/${mailingId}`)
+
+requests.push(resSubscriptionTypePromise, resEmailMailingPromise)
+
+try {
+    const responses = await Promise.all(requests)
+} catch (e) {
+    console.error(e)
+    throw e
+}
+```
+
+
+
+
+
+
 
 
 
