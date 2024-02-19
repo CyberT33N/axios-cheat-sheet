@@ -550,6 +550,59 @@ try {
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# Proxy
+- https://www.scrapingbee.com/blog/nodejs-axios-proxy/
+```javascript
+axios.get('https://api.ipify.org/?format=json',
+    {
+        proxy: {
+            protocol: 'http',
+            host: '149.129.239.170',
+            port: 8080
+        }
+    }
+)
+    .then(res => {
+        console.log(res.data)
+    }).catch(err => console.error(err))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
