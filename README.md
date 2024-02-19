@@ -547,6 +547,68 @@ try {
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+
+# Options
+
+## Params
+- https://stackoverflow.com/questions/53501185/how-to-post-query-parameters-with-axios
+```
+.post(`/mails/users/sendVerificationMail`, null, { params: {
+  mail,
+  firstname
+}})
+.then(response => response.status)
+.catch(err => console.warn(err));
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
