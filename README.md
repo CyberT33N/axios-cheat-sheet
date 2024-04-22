@@ -621,6 +621,7 @@ _________________________________________________
 # Proxy
 - https://www.scrapingbee.com/blog/nodejs-axios-proxy/
 ```javascript
+# Method #1
 axios.get('https://api.ipify.org/?format=json',
     {
         proxy: {
@@ -630,9 +631,25 @@ axios.get('https://api.ipify.org/?format=json',
         }
     }
 )
-    .then(res => {
-        console.log(res.data)
-    }).catch(err => console.error(err))
+.then(res => {
+    console.log(res.data)
+}).catch(err => console.error(err))
+
+
+
+# Method 2
+(async () => {
+  const axios = require('axios');
+  const HttpsProxyAgent = require('https-proxy-agent')
+
+  const axiosResponse = await axios.get('https://example.com', {
+      httpsAgent: new HttpsProxyAgent.HttpsProxyAgent(`http://ms-platform:30567`)
+  })
+
+  console.log(axiosResponse.data)
+   
+})()
+
 ```
 
 
