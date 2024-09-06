@@ -12,6 +12,28 @@ Axios Cheat Sheet with the most needed stuff..
 
 
 
+<br><br>
+_________________________________________________
+_________________________________________________
+<br><br>
+
+# Typescript
+
+## Error
+```typescript
+import axios, { AxiosError } from 'axios';
+
+.catch((err: Error | AxiosError) {
+  if (axios.isAxiosError(error))  {
+    // Access to config, request, and response
+  } else {
+    // Just a stock error
+  }
+})
+```
+
+
+
 
 
 
