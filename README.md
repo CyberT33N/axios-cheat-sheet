@@ -19,7 +19,10 @@ _________________________________________________
 
 # Typescript
 
-## Error
+<details><summary>Click to expand..</summary>
+
+
+# Error
 ```typescript
 import axios, { AxiosError } from 'axios';
 
@@ -32,7 +35,84 @@ import axios, { AxiosError } from 'axios';
 })
 ```
 
+<br><br>
 
+# Header
+- Use `RawAxiosRequestHeaders`
+```typescript
+
+// ==== DEPENDENCIES ====
+import { HttpClientError } from 'error-manager-helper'
+
+import axios,
+{ 
+    type Method, type AxiosError, type RawAxiosRequestHeaders
+} from 'axios'
+
+interface RequestParams {
+    url: string;
+    method: Method
+    payload?: any
+    headers?: RawAxiosRequestHeaders
+    timeout?: number
+    responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream'
+    errorMessage?: string
+}
+
+async function axiosRequestWrapper({
+    url, method, payload, headers,
+    timeout = 30000,
+    responseType,
+    errorMessage = 'axiosRequestWrapper() - Request failed'
+}: RequestParams): Promise<any> {
+    try {
+        const response = await axios({
+            url,
+            method,
+            data: payload,
+            headers,
+            timeout,
+            responseType
+        });
+        
+        return response;
+    } catch (e: unknown) {
+        throw new HttpClientError(errorMessage, e as AxiosError)
+    }
+}
+
+export default axiosRequestWrapper
+```
+
+And when you want to use it:
+```typescript
+/**
+ * 🔑 API Headers Interface
+ * Represents the structure of API request headers
+ * @interface ElevenLabsHeaders
+ */
+export interface ElevenLabsHeaders {
+    Accept: 'application/json';
+    'xi-api-key': string;
+    'Content-Type': 'application/json';
+    [key: string]: string;
+}
+
+ /**
+   * 🔑 Get default headers for API requests
+   * @private
+   * @returns {ElevenLabsHeaders} Headers object with API key and content type
+   */
+  private get headers(): ElevenLabsHeaders {
+      return {
+          'Accept': 'application/json',
+          'xi-api-key': this.apiKey,
+          'Content-Type': 'application/json'
+      };
+  }
+```
+
+</details>
 
 
 
